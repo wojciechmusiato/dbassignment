@@ -61,6 +61,9 @@ public class ClientInterface {
             case Commands.INSERT_ARTIST_CONCERT:
                 insertArtistToConcert(scanner);
                 break;
+            case Commands.GET_SHARED_SONGS:
+                dbo.getSharedSongs(currentlyLoggedUser.getId());
+                break;
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
                 break;
@@ -184,6 +187,9 @@ public class ClientInterface {
             case Commands.INSERT_ARTIST_CONCERT:
                 insertArtistToConcert(scanner);
                 break;
+            case Commands.GET_SHARED_SONGS:
+                dbo.getSharedSongs(currentlyLoggedUser.getId());
+                break;
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
                 break;
@@ -304,6 +310,9 @@ public class ClientInterface {
                 break;
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
+                break;
+            case Commands.GET_SHARED_SONGS:
+                dbo.getSharedSongs(currentlyLoggedUser.getId());
                 break;
             case Commands.BROWSE_ALL_PUBLISHERS:
                 dbo.getAllPublishers();

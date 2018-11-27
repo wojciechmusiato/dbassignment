@@ -28,11 +28,9 @@ public final class Commands {
     public static final String SEND_SONG = "sendSong";
     public static final String DELETE_USER = "deleteUser";
     public static final String GET_ALL_USERS = "getAllUsers";
-    public static final String GET_SONG = "getSong";
     public static final String SHARE_SONG = "shareSong";
     public static final String SEARCH_MUSIC = "searchMusic";
-    public static final String UPLOAD_SONG = "uploadSong";
-    public static final String DELETE_GROUP = "deleteGroup";
+    public static final String DELETE_GROUP = "deleteGroup";//todo
     public static final String CREATE_GROUP = "createGroup";
     public static final String ADD_USER_TO_GROUP = "addUserToGroup";
     public static final String DELETE_USER_FROM_GROUP = "deleteUserGroup";
@@ -43,7 +41,7 @@ public final class Commands {
     public static final String INSERT_REVIEW = "writeReview";
     public static final String DELETE_REVIEW = "deleteReview";
     public static final String SHOW_MY_REVIEWS = "showMyReviews";
-    public static final String SHOW_REVIEWS = "showAllReviews";
+    public static final String SHOW_REVIEWS = "showAllReviews";//todo
     public static final String BROWSE_ALL_PUBLISHERS = "getAllPublishers";
     public static final String BROWSE_ALL_CONCERTS = "getAllConcerts";
     public static final String INSERT_PUBLISHER = "insertPublisher";
@@ -67,9 +65,9 @@ public final class Commands {
 
                 CHANGE_ALBUM, CHANGE_ARTIST, CHANGE_SONG,
                 SHARE_SONG, ADD_TO_PLAYLIST,
-                GIVE_PRIVILAGE, UPLOAD_SONG,
+                GIVE_PRIVILAGE,
 
-                SEND_SONG, GET_SONG);
+                SEND_SONG);
     }
 
     public static List<String> getEditorCommands() {
@@ -87,9 +85,9 @@ public final class Commands {
 
                 CHANGE_ALBUM, CHANGE_ARTIST, CHANGE_SONG,
                 SHARE_SONG, ADD_TO_PLAYLIST,
-                UPLOAD_SONG,
 
-                SEND_SONG, GET_SONG);
+
+                SEND_SONG);
     }
 
     public static List<String> getUserCommands() {
@@ -107,8 +105,7 @@ public final class Commands {
 
 
                 SHARE_SONG, ADD_TO_PLAYLIST,
-                UPLOAD_SONG,
 
-                SEND_SONG, GET_SONG);
+                SEND_SONG);
     }
 }

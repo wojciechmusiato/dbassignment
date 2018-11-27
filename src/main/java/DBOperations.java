@@ -176,9 +176,7 @@ public class DBOperations {
         return true;
     }
 
-    public boolean getArtist(String artistName) {
-        return true;
-    }
+
 
     public boolean changeRoleOfAUser(String user, String role) {
         PreparedStatement stmt;
