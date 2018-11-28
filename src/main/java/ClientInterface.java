@@ -67,6 +67,9 @@ public class ClientInterface {
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
                 break;
+            case Commands.SHOW_PLAYLIST_SONGS:
+                getPlaylistsSongs(scanner);
+                break;
             case Commands.BROWSE_ALL_PUBLISHERS:
                 dbo.getAllPublishers();
                 break;
@@ -202,6 +205,9 @@ public class ClientInterface {
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
                 break;
+            case Commands.SHOW_PLAYLIST_SONGS:
+                getPlaylistsSongs(scanner);
+                break;
             case Commands.BROWSE_ALL_PUBLISHERS:
                 dbo.getAllPublishers();
                 break;
@@ -322,6 +328,9 @@ public class ClientInterface {
                 break;
             case Commands.BROWSE_LINEUP:
                 getLineup(scanner);
+                break;
+            case Commands.SHOW_PLAYLIST_SONGS:
+                getPlaylistsSongs(scanner);
                 break;
             case Commands.GET_SHARED_SONGS:
                 dbo.getSharedSongs(currentlyLoggedUser.getId());
@@ -446,6 +455,19 @@ public class ClientInterface {
         } else {
             dbo.getLineup(Integer.parseInt(conid));
         }
+    }
+
+    private void getPlaylistsSongs(Scanner scanner){
+        dbo.showPlaylists(currentlyLoggedUser);
+        System.out.println("enter id of playlist you want to see");
+        String id = scanner.nextLine();
+        if(!dbo.checkIfExists("playlists", "id", id)){
+            System.out.println("wrong data entered");
+        }
+        else {
+            dbo.getPlaylistSongs(currentlyLoggedUser, id);
+        }
+
     }
 
     private void insertArtistToConcert(Scanner scanner) {

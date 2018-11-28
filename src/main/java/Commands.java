@@ -52,6 +52,7 @@ public final class Commands {
     public static final String INSERT_ARTIST_CONCERT = "makeLineup";
     public static final String BROWSE_LINEUP = "getLineup";
     public static final String SET_BREAKUP_DATE = "setBreakUpDate";
+    public static final String SHOW_PLAYLIST_SONGS = "showPlaylistSongs";
 
     public static List<String> getAllCommands() {
         return Arrays.asList(REGISTER, LOGIN, HELP, EXIT, LOGOUT,
