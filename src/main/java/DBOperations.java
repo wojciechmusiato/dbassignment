@@ -859,8 +859,6 @@ public class DBOperations {
     public boolean insertPublisher(String pubid) {
         PreparedStatement stmt = null;
 
-
-
         try {
 
             stmt = c.prepareStatement("insert into publisher (name) values ('" + pubid + "')");
