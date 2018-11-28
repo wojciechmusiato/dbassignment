@@ -1055,4 +1055,42 @@ public class DBOperations {
         }
         return;
     }
+
+    public void deleteGroup(String id){
+        ResultSet rs = null;
+        Statement stmt;
+
+        try {
+            stmt = c.createStatement();
+            int i = stmt.executeUpdate("DELETE " +
+                    "FROM groops " +
+                    "WHERE groops.id = '" + id + "'");
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showOwnerGroups(User user){
+        ResultSet rs = null;
+        Statement stmt;
+        String format = "%-20s%-20s%n";
+        System.out.printf(format, "ID", "Name");
+        try {
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT groops.id, name " +
+                    "FROM groops " +
+                    "JOIN users ON users.id = owner_id " +
+                    "WHERE users.username = '" + user.getUsername() + "'");
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(2);
+
+                System.out.printf(format, id, name);
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

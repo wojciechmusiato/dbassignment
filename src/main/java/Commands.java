@@ -30,7 +30,7 @@ public final class Commands {
     public static final String GET_ALL_USERS = "getAllUsers";
     public static final String SHARE_SONG = "shareSong";
     public static final String SEARCH_MUSIC = "searchMusic";
-    public static final String DELETE_GROUP = "deleteGroup";//todo
+    public static final String DELETE_GROUP = "deleteGroup";
     public static final String CREATE_GROUP = "createGroup";
     public static final String ADD_USER_TO_GROUP = "addUserToGroup";
     public static final String DELETE_USER_FROM_GROUP = "deleteUserGroup";

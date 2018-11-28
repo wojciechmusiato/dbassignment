@@ -157,6 +157,9 @@ public class ClientInterface {
             case Commands.DELETE_SONG:
                 deleteSong(scanner);
                 break;
+            case Commands.DELETE_GROUP:
+                deleteGroup(scanner);
+                break;
             case Commands.DELETE_ALBUM:
                 deleteAlbum(scanner);
                 break;
@@ -288,6 +291,9 @@ public class ClientInterface {
                 break;
             case Commands.DELETE_SONG:
                 deleteSong(scanner);
+                break;
+            case Commands.DELETE_GROUP:
+                deleteGroup(scanner);
                 break;
             case Commands.DELETE_ALBUM:
                 deleteAlbum(scanner);
@@ -786,7 +792,15 @@ public class ClientInterface {
         } else {
             System.out.println("wrong data entered.");
         }
+    }
 
+    private void deleteGroup(Scanner scanner){
+        dbo.showOwnerGroups(currentlyLoggedUser);
+        System.out.println("Enter Id of group you would like to delete:");
+        String id = scanner.nextLine();
+        if(dbo.checkIfExists("groops", "id", id)){
+            dbo.deleteGroup(id);
+        }
     }
 
     private void changeArtist(Scanner scanner) {
