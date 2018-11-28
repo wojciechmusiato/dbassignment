@@ -107,6 +107,21 @@ public class DBOperations {
         return true;
     }
 
+    public boolean updateArtistBandBreakupDate(String date, int id){
+        PreparedStatement stmt;
+
+        try {
+            stmt = c.prepareStatement("update artists set bands_breakup_date = '"+date+"' where "+id+"=id");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public boolean updateSong(String title, int idsong) {
         PreparedStatement stmt;
 
@@ -858,10 +873,38 @@ public class DBOperations {
 
     public boolean insertPublisher(String pubid) {
         PreparedStatement stmt = null;
-
         try {
-
             stmt = c.prepareStatement("insert into publisher (name) values ('" + pubid + "')");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean insertGroupArtist(String artistName, String date) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = c.prepareStatement("insert into artists (artist_name, bands_creation_date) " +
+                    "values ('" + artistName + "','" + date + "')");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean insertIndividualArtist(String artistName, String musicianName) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = c.prepareStatement("insert into artists (artist_name, musicians_full_name) " +
+                    "values ('" + artistName + "','" + musicianName + "')");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;

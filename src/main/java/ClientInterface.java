@@ -79,6 +79,12 @@ public class ClientInterface {
             case Commands.INSERT_CONCERT:
                 insertConcert(scanner);
                 break;
+            case Commands.INSERT_IND_ARTIST:
+                insertIndividualArtist(scanner);
+                break;
+            case Commands.INSERT_GROUP_ARTIST:
+                insertGroupArtist(scanner);
+                break;
             case Commands.DELETE_CONCERT:
                 deleteConcert(scanner);
                 break;
@@ -135,6 +141,9 @@ public class ClientInterface {
                 break;
             case Commands.CHANGE_SONG:
                 changeSong(scanner);
+                break;
+            case Commands.SET_BREAKUP_DATE:
+                setBreakUpDateOfBand(scanner);
                 break;
             case Commands.CHANGE_ALBUM:
                 changeAlbum(scanner);
@@ -261,6 +270,9 @@ public class ClientInterface {
                 break;
             case Commands.CHANGE_SONG:
                 changeSong(scanner);
+                break;
+            case Commands.SET_BREAKUP_DATE:
+                setBreakUpDateOfBand(scanner);
                 break;
             case Commands.CHANGE_ALBUM:
                 changeAlbum(scanner);
@@ -482,9 +494,34 @@ public class ClientInterface {
         String end = scanner.nextLine();
 
         if (dbo.insertConcert(start, end, name)) {
-            System.out.println("Created concert:" + name);
+            System.out.println("Created concert: " + name);
         } else {
             System.out.println("Something went wrong.");
+        }
+    }
+
+    private void insertIndividualArtist(Scanner scanner) {
+        System.out.println("Enter artist name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter full musician name:");
+        String musicianName = scanner.nextLine();
+        if (dbo.insertIndividualArtist(name, musicianName)) {
+            System.out.println("Created individual artist: " + name);
+        } else {
+            System.out.println("Something went wrong.");
+        }
+    }
+
+    private void insertGroupArtist(Scanner scanner) {
+        System.out.println("Enter artist name:");
+        String name = scanner.nextLine();
+        System.out.println("Enter date of creation the band (yyyy-MM-dd)");
+        String date = scanner.nextLine();
+        if(dbo.insertGroupArtist(name, date)){
+            System.out.println("Created the band: " + name);
+        }
+        else{
+            System.out.println("Something went wrong");
         }
     }
 
@@ -492,7 +529,7 @@ public class ClientInterface {
         System.out.println("Enter name for publisher:");
         String pubid = scanner.nextLine();
         if (dbo.insertPublisher(pubid)) {
-            System.out.println("Created publisher:" + pubid);
+            System.out.println("Created publisher: " + pubid);
         } else {
             System.out.println("Something went wrong.");
         }
@@ -575,7 +612,7 @@ public class ClientInterface {
         if (!dbo.checkIfExists("playlists", "id", idplay) || !dbo.checkIfExists("songs", "id", idsong)) {
             System.out.println("Wrong data entered");
         } else {
-            if (dbo.addSongToPlaylist(Integer.parseInt(idplay), Integer.parseInt(idsong),currentlyLoggedUser.getId())) {
+            if (dbo.addSongToPlaylist(Integer.parseInt(idplay), Integer.parseInt(idsong), currentlyLoggedUser.getId())) {
                 System.out.println("Inserted song to playlist.");
             } else {
                 System.out.println("Something went wrong.");
@@ -751,6 +788,22 @@ public class ClientInterface {
         if (dbo.checkIfExists("songs", "id", idsong)) {
             if (dbo.updateSong(newname, Integer.parseInt(idsong))) {
                 System.out.println("Song title changed.");
+            } else {
+                System.out.println("Sth went wrong...");
+            }
+        } else {
+            System.out.println("song id doesnt exist");
+        }
+    }
+    private void setBreakUpDateOfBand(Scanner scanner) {
+        dbo.getAllArtists();
+        System.out.println("insert ID of band you would like to change the break up date:");
+        String id = scanner.nextLine();
+        System.out.println("date of break up (yyyy-MM-dd):");
+        String date = scanner.nextLine();
+        if (dbo.checkIfExists("artists", "id", id)) {
+            if (dbo.updateArtistBandBreakupDate(date, Integer.parseInt(id))) {
+                System.out.println("breakup date added");
             } else {
                 System.out.println("Sth went wrong...");
             }

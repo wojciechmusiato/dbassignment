@@ -47,8 +47,11 @@ public final class Commands {
     public static final String INSERT_PUBLISHER = "insertPublisher";
     public static final String DELETE_CONCERT = "deleteConcert";
     public static final String INSERT_CONCERT = "createConcert";
+    public static final String INSERT_IND_ARTIST = "createOneArtist";
+    public static final String INSERT_GROUP_ARTIST = "createBand";
     public static final String INSERT_ARTIST_CONCERT = "makeLineup";
     public static final String BROWSE_LINEUP = "getLineup";
+    public static final String SET_BREAKUP_DATE = "setBreakUpDate";
 
     public static List<String> getAllCommands() {
         return Arrays.asList(REGISTER, LOGIN, HELP, EXIT, LOGOUT,
@@ -58,7 +61,7 @@ public final class Commands {
                 SHOW_REVIEWS, SHOW_MY_REVIEWS,
 
                 INSERT_SONGS, INSERT_ALBUM, INSERT_ARTIST, INSERT_PLAYLIST,
-                INSERT_REVIEW, INSERT_PUBLISHER, INSERT_CONCERT, INSERT_ARTIST_CONCERT,
+                INSERT_REVIEW, INSERT_PUBLISHER, INSERT_CONCERT, INSERT_ARTIST_CONCERT, INSERT_GROUP_ARTIST, INSERT_IND_ARTIST,
 
                 DELETE_REVIEW, DELETE_USER, DELETE_ARTIST, DELETE_ALBUM, DELETE_CONCERT, DELETE_SONG,
                 DELETE_PLAYLIST, DELETE_GROUP,
@@ -78,7 +81,7 @@ public final class Commands {
                 SHOW_REVIEWS, SHOW_MY_REVIEWS,
 
                 INSERT_SONGS, INSERT_ALBUM, INSERT_ARTIST, INSERT_PLAYLIST,
-                INSERT_REVIEW, INSERT_PUBLISHER, INSERT_CONCERT, INSERT_ARTIST_CONCERT,
+                INSERT_REVIEW, INSERT_PUBLISHER, INSERT_CONCERT, INSERT_ARTIST_CONCERT, INSERT_GROUP_ARTIST, INSERT_IND_ARTIST,
 
                 DELETE_REVIEW, DELETE_ARTIST, DELETE_ALBUM, DELETE_CONCERT, DELETE_SONG,
                 DELETE_PLAYLIST, DELETE_GROUP,
