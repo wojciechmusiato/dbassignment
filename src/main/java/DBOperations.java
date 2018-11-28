@@ -705,7 +705,7 @@ public class DBOperations {
         return;
     }
 
-    public boolean addSongToPlaylist(int idplay, int idsong) {
+    public boolean addSongToPlaylist(int idplay, int idsong, int iduser) {
         PreparedStatement stmt;
         Statement stmt2;
         ResultSet rs= null;
@@ -713,7 +713,7 @@ public class DBOperations {
             stmt2 = c.createStatement();
             rs = stmt2.executeQuery("SELECT COUNT(*)FROM users_playlists " +
                     "where playlists_id =" + idplay + " and " +
-                    "users_id =" + idsong + " ");
+                    "users_id =" + iduser + " ");
             rs.next();
             if (rs.getInt(1) == 0) {
                 System.out.println("This playlist isn't yours.");

@@ -575,7 +575,7 @@ public class ClientInterface {
         if (!dbo.checkIfExists("playlists", "id", idplay) || !dbo.checkIfExists("songs", "id", idsong)) {
             System.out.println("Wrong data entered");
         } else {
-            if (dbo.addSongToPlaylist(Integer.parseInt(idplay), Integer.parseInt(idsong))) {
+            if (dbo.addSongToPlaylist(Integer.parseInt(idplay), Integer.parseInt(idsong),currentlyLoggedUser.getId())) {
                 System.out.println("Inserted song to playlist.");
             } else {
                 System.out.println("Something went wrong.");
