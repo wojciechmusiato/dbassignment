@@ -275,8 +275,8 @@ public class DBOperations {
     public void getAllArtists() {
         Statement stmt;
         ResultSet rs = null;
-        String format = "%-20s%-20s%-20s%-20s%-20s%-20s%n";
-        System.out.printf(format, "Artist ID", "Name", "Composer name",
+        String format = "%-20s%-20s%-20s%-20s%-20s%n";
+        System.out.printf(format, "Artist ID", "Name",
                 "Band Creation date", "Band Breakup Date", "Musician's Full name");
         try {
             stmt = c.createStatement();
@@ -287,8 +287,7 @@ public class DBOperations {
                 String c = rs.getString(3);
                 String d = rs.getString(4);
                 String e = rs.getString(5);
-                String f = rs.getString(6);
-                System.out.printf(format, a,b,c,d,e,f);
+                System.out.printf(format, a,b,c,d,e);
             }
             stmt.close();
         } catch (SQLException e) {
