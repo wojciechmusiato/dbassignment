@@ -10,8 +10,8 @@ public class DBOperations {
 
     public DBOperations() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", "root");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            c = DriverManager.getConnection("jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -858,6 +858,7 @@ public class DBOperations {
 
     public boolean insertPublisher(String pubid) {
         PreparedStatement stmt = null;
+
         try {
 
             stmt = c.prepareStatement("insert into publisher (name) values ('" + pubid + "')");
