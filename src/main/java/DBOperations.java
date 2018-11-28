@@ -74,9 +74,6 @@ public class DBOperations {
         return;
     }
 
-
-
-
     public boolean deleteAlbum(int albumid) {
         PreparedStatement stmt;
         try {
@@ -107,11 +104,26 @@ public class DBOperations {
         return true;
     }
 
+    public boolean updateArtistBandBreakupDate(String date, int id) {
+        PreparedStatement stmt;
+
+        try {
+            stmt = c.prepareStatement("update artists set bands_breakup_date = '" + date + "' where " + id + "=id");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public boolean updateSong(String title, int idsong) {
         PreparedStatement stmt;
 
         try {
-            stmt = c.prepareStatement("update songs set title = '"+title+"' where "+idsong+"=id");
+            stmt = c.prepareStatement("update songs set title = '" + title + "' where " + idsong + "=id");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -176,8 +188,6 @@ public class DBOperations {
         return true;
     }
 
-
-
     public boolean changeRoleOfAUser(String user, String role) {
         PreparedStatement stmt;
         Statement stmt2;
@@ -198,7 +208,6 @@ public class DBOperations {
         }
         return true;
     }
-
 
     public void getAllUsers() {
         Statement stmt;
@@ -222,7 +231,6 @@ public class DBOperations {
         }
         return;
     }
-
 
     public void getAllSongs() {
         Statement stmt;
@@ -287,7 +295,7 @@ public class DBOperations {
                 String c = rs.getString(3);
                 String d = rs.getString(4);
                 String e = rs.getString(5);
-                System.out.printf(format, a,b,c,d,e);
+                System.out.printf(format, a, b, c, d, e);
             }
             stmt.close();
         } catch (SQLException e) {
@@ -295,7 +303,6 @@ public class DBOperations {
         }
         return;
     }
-
 
     public boolean login(String username, String password) {
 
@@ -319,7 +326,6 @@ public class DBOperations {
         }
         return false;
     }
-
 
     public void getSharedSongs(int userid) {
         Statement stmt;
@@ -375,7 +381,6 @@ public class DBOperations {
         return true;
     }
 
-
     public User getOneUser(String username) {
         Statement stmt = null;
         String query = "";
@@ -405,7 +410,6 @@ public class DBOperations {
         }
         return null;
     }
-
 
     public boolean deleteArtist(String name) {
         Statement stmt = null;
@@ -672,7 +676,7 @@ public class DBOperations {
                 System.out.println("This playlist isn't yours.");
                 return false;
             }
-            stmt = c.prepareStatement("delete from playlists where id = "+playlistid+" ");
+            stmt = c.prepareStatement("delete from playlists where id = " + playlistid + " ");
             stmt.executeUpdate();
 
 
@@ -692,7 +696,7 @@ public class DBOperations {
             rs = stmt.executeQuery("select p.id,p.name " +
                     "from playlists p, users_playlists up " +
                     "where up.playlists_id = p.id and " +
-                    "up.users_id = "+userid+" ");
+                    "up.users_id = " + userid + " ");
             while (rs.next()) {
                 int idd = rs.getInt(1);
                 String user = rs.getString(2);
@@ -708,7 +712,7 @@ public class DBOperations {
     public boolean addSongToPlaylist(int idplay, int idsong, int iduser) {
         PreparedStatement stmt;
         Statement stmt2;
-        ResultSet rs= null;
+        ResultSet rs = null;
         try {
             stmt2 = c.createStatement();
             rs = stmt2.executeQuery("SELECT COUNT(*)FROM users_playlists " +
@@ -719,7 +723,7 @@ public class DBOperations {
                 System.out.println("This playlist isn't yours.");
                 return false;
             }
-            stmt = c.prepareStatement("insert into playlists_songs values ("+idplay+","+idsong+")");
+            stmt = c.prepareStatement("insert into playlists_songs values (" + idplay + "," + idsong + ")");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -731,12 +735,12 @@ public class DBOperations {
         return true;
     }
 
-    public boolean insertReview(int albumid,String review, int userid) {
+    public boolean insertReview(int albumid, String review, int userid) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             stmt = c.prepareStatement("insert into reviews (text, users_id, albums_id) " +
-                    "values ('"+review+"',"+userid+","+albumid+")");
+                    "values ('" + review + "'," + userid + "," + albumid + ")");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -755,12 +759,12 @@ public class DBOperations {
         try {
             stmt = c.createStatement();
             rs = stmt.executeQuery("select r.id,r.text,a.album_name from reviews r,albums a " +
-                    "where "+userid+"= r.users_id and r.albums_id = a.id");
+                    "where " + userid + "= r.users_id and r.albums_id = a.id");
             while (rs.next()) {
                 int idd = rs.getInt(1);
                 String user = rs.getString(2);
                 String se = rs.getString(3);
-                System.out.printf(format, idd, user,se);
+                System.out.printf(format, idd, user, se);
             }
             stmt.close();
         } catch (SQLException e) {
@@ -777,12 +781,12 @@ public class DBOperations {
         try {
             stmt = c.createStatement();
             rs = stmt.executeQuery("select r.id,r.text,r.users_id from reviews r,albums a " +
-                    "where "+albumid+"= r.albums_id and r.albums_id = a.id");
+                    "where " + albumid + "= r.albums_id and r.albums_id = a.id");
             while (rs.next()) {
                 int idd = rs.getInt(1);
                 String user = rs.getString(2);
                 String se = rs.getString(3);
-                System.out.printf(format, idd, user,se);
+                System.out.printf(format, idd, user, se);
             }
             stmt.close();
         } catch (SQLException e) {
@@ -791,7 +795,7 @@ public class DBOperations {
         return;
     }
 
-    public boolean deleteReview(int revid,int userid) {
+    public boolean deleteReview(int revid, int userid) {
         PreparedStatement stmt;
         Statement stmt2;
         ResultSet rs;
@@ -818,14 +822,14 @@ public class DBOperations {
         Statement stmt;
         ResultSet rs = null;
         String format = "%-20s%-20s%n";
-        System.out.printf(format, "Publisher ID","Publisher name");
+        System.out.printf(format, "Publisher ID", "Publisher name");
         try {
             stmt = c.createStatement();
             rs = stmt.executeQuery("select * from publisher");
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String user = rs.getString(2);
-                System.out.printf(format, id ,user);
+                System.out.printf(format, id, user);
             }
             stmt.close();
         } catch (SQLException e) {
@@ -834,11 +838,11 @@ public class DBOperations {
         return;
     }
 
-    public void getAllConcerts( ) {
+    public void getAllConcerts() {
         Statement stmt;
         ResultSet rs = null;
         String format = "%-20s%-20s%-20s%-20s%n";
-        System.out.printf(format, "Start Date","End Date","ID","Name");
+        System.out.printf(format, "Start Date", "End Date", "ID", "Name");
         try {
             stmt = c.createStatement();
             rs = stmt.executeQuery("select * from concerts");
@@ -847,7 +851,7 @@ public class DBOperations {
                 String s = rs.getString(2);
                 int id = rs.getInt(3);
                 String ss = rs.getString(4);
-                System.out.printf(format,  user,s,id,ss);
+                System.out.printf(format, user, s, id, ss);
             }
             stmt.close();
         } catch (SQLException e) {
@@ -858,10 +862,38 @@ public class DBOperations {
 
     public boolean insertPublisher(String pubid) {
         PreparedStatement stmt = null;
-
         try {
-
             stmt = c.prepareStatement("insert into publisher (name) values ('" + pubid + "')");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean insertGroupArtist(String artistName, String date) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = c.prepareStatement("insert into artists (artist_name, bands_creation_date) " +
+                    "values ('" + artistName + "','" + date + "')");
+            if (stmt.executeUpdate() == 0) {
+                System.out.println("Nothing inserted...WTF");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean insertIndividualArtist(String artistName, String musicianName) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = c.prepareStatement("insert into artists (artist_name, musicians_full_name) " +
+                    "values ('" + artistName + "','" + musicianName + "')");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -909,7 +941,7 @@ public class DBOperations {
 
             stmt = c.prepareStatement("insert into albums " +
                     "(album_name, creation_date, genre, descr, publisher_id, artists_id) " +
-                    "values ('" + name + "','" + formatter + "','" + gen + "','" + des + "'," + pubid + "," + arid +" )");
+                    "values ('" + name + "','" + formatter + "','" + gen + "','" + des + "'," + pubid + "," + arid + " )");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -935,7 +967,7 @@ public class DBOperations {
                 return false;
             }
             stmt = c.prepareStatement("insert into concerts_artists " +
-                    "values (" + conid + "," + arid +" )");
+                    "values (" + conid + "," + arid + " )");
             if (stmt.executeUpdate() == 0) {
                 System.out.println("Nothing inserted...WTF");
                 return false;
@@ -950,23 +982,115 @@ public class DBOperations {
         Statement stmt;
         ResultSet rs = null;
         String format = "%-20s%-20s%n";
-        System.out.printf(format, "Concert Name","Artist Name");
+        System.out.printf(format, "Concert Name", "Artist Name");
         try {
             stmt = c.createStatement();
             rs = stmt.executeQuery("select c.name,a.artist_name " +
                     "from concerts c, artists a, concerts_artists ca " +
                     "where c.id = ca.concerts_id and ca.artists_id=a.id" +
-                    "and "+conid+"= ca.concerts_id");
+                    "and " + conid + "= ca.concerts_id");
             while (rs.next()) {
                 String user = rs.getString(1);
                 String s = rs.getString(2);
 
-                System.out.printf(format,  user,s);
+                System.out.printf(format, user, s);
             }
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return;
+    }
+
+    public void getPlaylistSongs(User user, String playlistId){
+        ResultSet rs = null;
+        Statement stmt;
+        String format = "%-20s%-20s%n";
+        System.out.printf(format, "Name", "Length");
+        try {
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT title, length " +
+                    "FROM songs " +
+                    "JOIN playlists_songs ON playlists_songs.songs_id = songs.id " +
+                    "WHERE playlists_songs.playlists_id = ( " +
+                    "SELECT id " +
+                    "FROM playlists " +
+                    "WHERE playlists.id = ' " + playlistId + "')");
+            while (rs.next()) {
+                String title = rs.getString(1);
+                String length = rs.getString(2);
+
+                System.out.printf(format, title, length);
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return;
+    }
+
+    public void showPlaylists(User user){
+        ResultSet rs = null;
+        Statement stmt;
+        String format = "%-20s%-20s%n";
+        System.out.printf(format, "id", "Name");
+        try {
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT id, name " +
+                    "FROM playlists " +
+                    "JOIN users_playlists ON users_playlists.playlists_id = playlists.id " +
+                    "WHERE users_playlists.users_id = ( " +
+                    "SELECT id " +
+                    "FROM users " +
+                    "WHERE users.username = '" + user.getUsername() + "' )");
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(2);
+
+                System.out.printf(format, id, name);
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return;
+    }
+
+    public void deleteGroup(String id){
+        ResultSet rs = null;
+        Statement stmt;
+
+        try {
+            stmt = c.createStatement();
+            int i = stmt.executeUpdate("DELETE " +
+                    "FROM groops " +
+                    "WHERE groops.id = '" + id + "'");
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showOwnerGroups(User user){
+        ResultSet rs = null;
+        Statement stmt;
+        String format = "%-20s%-20s%n";
+        System.out.printf(format, "ID", "Name");
+        try {
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT groops.id, name " +
+                    "FROM groops " +
+                    "JOIN users ON users.id = owner_id " +
+                    "WHERE users.username = '" + user.getUsername() + "'");
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(2);
+
+                System.out.printf(format, id, name);
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
