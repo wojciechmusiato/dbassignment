@@ -5,10 +5,10 @@ Technologies used:
 <li>Java</li>
 <li>MySQL database</li>
 </ul>
-ER diagrams:
+ER diagrams:<br/>
 https://github.com/wojciechmusiato/dbassignment/blob/master/ER%20diagrams.pdf
 
-Report
+Report: <br/>
 https://github.com/wojciechmusiato/dbassignment/blob/master/Report.pdf
 
 
